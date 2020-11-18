@@ -1,0 +1,155 @@
+body {
+    /*Setting default margin to zero and background styles for body*/
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    background-color: #f4f4f4;
+}
+
+form {
+    /*Adding shadow to form and setting up box size for form*/
+    border: 3px solid #f1f1f1;
+
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #eeeded;
+    border-radius: 40px;
+
+    -webkit-box-shadow: 7px 7px 5px 0px #d2d3c9;
+    -moz-box-shadow: 7px 7px 5px 0px #d2d3c9;
+    box-shadow: 35px 7px 10px 10px #d2d3c9;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number] {
+    /*Setting up layout for input boxes*/
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 10px;
+    font-family: 'Comfortaa', cursive;
+    border-radius: 10px;
+}
+
+/*formatting font awesome icons for input boxes*/
+.input-container {
+
+    display: -ms-flexbox;
+    /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    color: #8f384d;
+    min-width: 30px;
+    padding-top: 13px;
+}
+
+/*design for signup button*/
+
+.signup {
+    background-color: #511845;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 30%;
+    -webkit-box-shadow: 7px 7px 5px 0px #772c49;
+    -moz-box-shadow: 7px 7px 5px 0px #772c49;
+    box-shadow: 7px 7px 5px 0px #772c49;
+    font-family: 'Comfortaa', cursive;
+    font-size: 12px;
+
+}
+
+
+.signup:hover {
+    opacity: 0.8;
+    background-color: #900c3f;
+
+    -webkit-box-shadow: 7px 7px 5px 0px #511845;
+    -moz-box-shadow: 7px 7px 5px 0px #511845;
+    box-shadow: 7px 7px 5px 0px #511845;
+}
+
+/*design for signin button*/
+
+.signin {
+    font-size: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+.signin-btn {
+    border: solid;
+    border-color: #772666;
+    background-color: #772666;
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.signin-btn:hover {
+    background-color: #900c3f;
+    border-color: #900c3f
+}
+
+
+
+
+/*Container size and width*/
+.container {
+    padding: 16px;
+    max-width: 300px;
+    margin: auto;
+
+}
+
+/*utility to add line space on top of element*/
+.spc {
+    padding-top: 5px;
+}
+
+
+/*setting up header and footer design*/
+.header {
+    padding-top: 20px;
+    margin-block-start: 0px;
+    text-align: center;
+    background: #941933;
+    color: #fffafa;
+    line-height: 35px;
+}
+
+.heading {
+
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin: 0px;
+    font-size: 40px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+h3 {
+
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin: 0px;
+    font-size: 40px;
+    font-family: 'Varela Round', sans-serif;
+    padding-left: 30px;
+}
+
+.tagline {
+    font-family: 'Comfortaa', cursive;
+    font-size: 30px;
+    color: #f8efd4
+}
