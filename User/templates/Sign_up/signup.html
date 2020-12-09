@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="signin.css">
+    <link rel="stylesheet" href="static/css/signup.css">
 
 
 </head>
@@ -21,7 +21,7 @@
         <div class="container">
 
             <center>
-                <h1 style="color: #511845; font-family:'Varela Round',sans-serif;">User Sign in</h1>
+                <h1 style="color: #511845; font-family:'Varela Round',sans-serif;">User Sign up</h1>
             </center>
             <div class="spc">
                 <div class="input-container">
@@ -30,21 +30,41 @@
                 </div>
             </div>
 
-                     <div class="spc">
+            <div class="spc">
+                <div class="input-container">
+                    <i class="fa fa-envelope-square icon" style="font-size: 30px;"></i>
+                    <input type="email" placeholder="Email Address" name="email" required>
+                </div>
+            </div>
+
+            <div class="spc">
+                <div class="input-container">
+                    <i class="fa fa-phone icon" style="font-size: 30px;"></i>
+                    <input type="number" placeholder="Phone Number" name="phone no" required>
+                </div>
+            </div>
+
+            <div class="spc">
                 <div class="input-container">
                     <i class="fa fa-lock icon" style="font-size: 30px;"></i>
                     <input type="password" placeholder="Password" name="psw" required>
                 </div>
             </div>
 
-
-            <center><button class="signin" type="submit">Sign-in</button></center>
-
-            <div class="spc" style="padding-left:65px">
+            <div class="spc">
                 <div class="input-container">
-                    <h3 class="pass">
-                        <centre>Forgot</centre>
-                        <button class="pass-btn"><a style="text-decoration: none;color: white;" href="#">Password</a></button>
+                    <i class="fa fa-lock icon" style="font-size: 30px;"></i>
+                    <input class="input-field" type="password" placeholder="Re-enter password" name="psw">
+                </div>
+            </div>
+
+            <center><button class="signup" type="submit">Sign-up</button></center>
+
+            <div class="spc" style="padding-left:30px">
+                <div class="input-container">
+                    <h3 class="signin">
+                        <centre>Already have an Account?</centre>
+                        <button class="signin-btn"><a style="text-decoration: none;color: white;" href="../Sign_in/signin.html">Sign-in</a></button>
                     </h3>
 
                 </div>
@@ -56,7 +76,7 @@
 
 
 
-    <div class="header" style=" position: fixed;left: 0;bottom: 0;width:100%; margin-top:50px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
+    <div class="header" style="left: 0;bottom: 0;width:100%; margin-top:50px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
         <footer style="text-align: left;">&copy; Copyright 2020 <span style="color:#fbdcc4;font-size:18px; font-family: 'Varela Round', sans-serif;">EMERGENCY-SERVICES</span>
             <span style="padding-left: 890px;">
 
