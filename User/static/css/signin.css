@@ -155,9 +155,13 @@ h3 {
 }
 
 /* Style the top navigation bar */
+
+/* Style the top navigation bar */
 .navbar {
-    padding-top: 30px;
+    overflow: hidden;
     background-color: #333;
+    font-size: 15px;
+
 }
 
 /* Style the navigation bar links */
@@ -166,7 +170,7 @@ h3 {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 20px;
+    padding: 8px 20px;
     text-decoration: none;
 }
 
