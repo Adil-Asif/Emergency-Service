@@ -4,15 +4,14 @@ drop table complain
 
 
 create table application_user(
- username VARCHAR(50),
- email VARCHAR(50),
- phone varchar(30) ,
- pass VARCHAR(50),
- user_id varchar(30),
- PRIMARY KEY (user_id)
+ username VARCHAR(50) not null,
+ email VARCHAR(50) not null,
+ phone number not null,
+ pass VARCHAR(50) not null,
+ user_id varchar(30) not null,
+ PRIMARY KEY (user_id) 
  );
 
-select * from Application_user
  
  create table application_manager(
  username VARCHAR(50) not null,
@@ -34,4 +33,13 @@ create table complain(
  FOREIGN KEY ( app_id ) REFERENCES application_manager (app_id),
  primary key(complain_id,user_id)
  );
- 
+
+
+
+select * from application_user 
+
+Insert into application_user
+values('Adil','adilasi1999@hotmail.com',123456789111,'Dfb456','1234')
+
+Select count(*) from application_user where phone = 123456789111
+
