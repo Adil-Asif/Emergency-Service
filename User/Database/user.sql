@@ -3,7 +3,7 @@ drop table complain
 
 
 
-create table application_user(
+ create table application_user(
  username VARCHAR(50) not null,
  email VARCHAR(50) not null,
  phone number not null,

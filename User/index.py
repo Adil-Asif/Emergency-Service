@@ -40,15 +40,35 @@ def signup_page():
         user_password = request.form.get("psw")
         print(user_name, user_email,user_number, user_password)
         k=0
-        number = user_number
+        name = user_name
         passw = user_password
         
         
              
              
         if user_name!=None and user_email!=None and user_number!=None and user_password!=None: 
-             
-             user_id =  number[0:2] + passw[0:2] + str(random.randrange(1000,9999)) 
+              
+             flag = True
+             while flag == True:  
+                 user_id =  name[0:2] + passw[0:2] + str(random.randrange(1000,9999)) 
+                 sql_search = 'Select user_id from application_user'
+                 sql_count = 'Select count(user_id) from application_user'
+                 cur.execute(sql_search)
+                 res = cur.fetchall()
+                 cur.execute(sql_count)
+                 count = cur.fetchall()
+                 print(count)
+                 k=0
+              
+                 for i in range(count[0][0]):
+                     if res[i][0] == user_id:
+                         k = k+1
+                         exit
+                  
+                 if(k==0):
+                     flag = False
+
+             k=0
              sql_search = 'Select phone from application_user'
              sql_count = 'Select count(phone) from application_user'
              cur.execute(sql_search)
@@ -58,7 +78,7 @@ def signup_page():
              sql_search = 'Select email from application_user'
              cur.execute(sql_search)
              search_email = cur.fetchall()
-             
+             print(search_email)
              for i in range(count[0][0]):
                  print(search_email[i][0])
                  if search_email[i][0] == user_email:
