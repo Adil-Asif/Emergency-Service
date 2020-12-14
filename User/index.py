@@ -103,6 +103,26 @@ def signup_page():
 def signin_page():
     return render_template('/Sign_in/signin.html')
 
+@app.route('/homepage')
+def home_page():
+    return render_template('/Sign_in/index.html')
+
+
+@app.route('/police')
+def police_page():
+    return render_template('/Sign_in/police.html')
+
+
+@app.route('/ambulance')
+def ambulance_page():
+    return render_template('/Sign_in/amb.html')
+
+
+@app.route('/firebrgd')
+def firebrgd_page():
+    return render_template('/Sign_in/firebrgd.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
