@@ -8,6 +8,13 @@ cur = conn.cursor()
 app = Flask(__name__)
 
 
+@app.route('/fail')
+def fail_page():
+    return render_template('/Sign_up/fail.html')
+
+
+
+
 @app.route('/')
 def homepage():
     return render_template('/Home/index.html')
@@ -80,12 +87,14 @@ def signup_page():
              search_email = cur.fetchall()
              print(search_email)
              for i in range(count[0][0]):
-                 print(search_email[i][0])
+                 print(search_phone[i][0])
                  if search_email[i][0] == user_email:
                      k = k+1
-                     print(k)
+                     
                  if search_phone[i][0] == user_number:
                      k = k+1
+                     print(k)
+                     
                  if k >0 :
                      exit
                 
@@ -94,7 +103,7 @@ def signup_page():
                  cur.execute(sql_insert, (user_name, user_email,user_number, user_password, user_id))
                  conn.commit()
              else:
-                 render_template('Email Address / Phone Number is already Registered')
+                 return render_template('/Sign_up/fail.html')
 
     return render_template('/Sign_up/signup.html')
 
@@ -122,6 +131,9 @@ def ambulance_page():
 def firebrgd_page():
     return render_template('/Sign_in/firebrgd.html')
 
+@app.route('/complain')
+def complain_page():
+    return render_template('/Sign_in/complain.html')
 
 
 if __name__ == "__main__":
