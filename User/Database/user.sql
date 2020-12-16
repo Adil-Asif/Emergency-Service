@@ -29,6 +29,7 @@ create table complain(
  complain_details varchar (500),
  user_id varchar(30) not null,
  app_id varchar(30),
+ address varchar(50)
  FOREIGN KEY ( user_id ) REFERENCES application_user (user_id),
  FOREIGN KEY ( app_id ) REFERENCES application_manager (app_id),
  primary key(complain_id,user_id)
