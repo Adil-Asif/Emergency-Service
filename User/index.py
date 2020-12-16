@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import cx_Oracle
 import random
 
@@ -132,7 +132,7 @@ def signin_page():
                      global  login_id
                      login_id = search_res[j][4]
                      print(login_id)
-                     return home_page()
+                     return redirect('/homepage')
                       
              else:
                       return render_template('/Sign_in/fail.html')
