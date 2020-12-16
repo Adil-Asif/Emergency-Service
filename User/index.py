@@ -13,8 +13,6 @@ def fail_page():
     return render_template('/Sign_up/fail.html')
 
 
-
-
 @app.route('/')
 def homepage():
     return render_template('/Home/index.html')
@@ -38,26 +36,22 @@ def pol_page():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_page():
 
-    
- 
     if request.method == "POST":
         user_name = request.form.get('username')
         user_email = request.form.get('email')
         user_number = request.form.get('number')
         user_password = request.form.get("psw")
-        print(user_name, user_email,user_number, user_password)
-        k=0
+        print(user_name, user_email, user_number, user_password)
+        k = 0
         name = user_name
         passw = user_password
-        
-        
-             
-             
-        if user_name!=None and user_email!=None and user_number!=None and user_password!=None: 
-              
+
+        if user_name != None and user_email != None and user_number != None and user_password != None:
+
              flag = True
-             while flag == True:  
-                 user_id =  name[0:2] + passw[0:2] + str(random.randrange(1000,9999)) 
+             while flag == True:
+                 user_id = name[0:2] + passw[0:2] + \
+                     str(random.randrange(1000, 9999))
                  sql_search = 'Select user_id from application_user'
                  sql_count = 'Select count(user_id) from application_user'
                  cur.execute(sql_search)
@@ -65,17 +59,17 @@ def signup_page():
                  cur.execute(sql_count)
                  count = cur.fetchall()
                  print(count)
-                 k=0
-              
+                 k = 0
+
                  for i in range(count[0][0]):
                      if res[i][0] == user_id:
                          k = k+1
                          exit
-                  
-                 if(k==0):
+
+                 if(k == 0):
                      flag = False
 
-             k=0
+             k = 0
              sql_search = 'Select phone from application_user'
              sql_count = 'Select count(phone) from application_user'
              cur.execute(sql_search)
@@ -90,31 +84,67 @@ def signup_page():
                  print(search_phone[i][0])
                  if search_email[i][0] == user_email:
                      k = k+1
-                     
+
                  if search_phone[i][0] == user_number:
                      k = k+1
                      print(k)
-                     
-                 if k >0 :
+
+                 if k > 0:
                      exit
-                
+
              if k < 1:
                  sql_insert = """ Insert into application_user(username,email,phone,pass,user_id) values(:user_name,:useremail,:user_number,:user_password,:user_id) """
-                 cur.execute(sql_insert, (user_name, user_email,user_number, user_password, user_id))
+                 cur.execute(sql_insert, (user_name, user_email,
+                             user_number, user_password, user_id))
                  conn.commit()
              else:
-                 return render_template('/Sign_up/fail.html')
+               return fail_page()
 
     return render_template('/Sign_up/signup.html')
 
-
+ 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin_page():
-    return render_template('/Sign_in/signin.html')
+
+        if request.method == "POST":
+          user_email = request.form.get('email')
+          user_password = request.form.get("psw")
+          print(user_email, user_password)
+          if user_email != None and user_password != None:
+
+             k = 0
+             j = None
+             sql_search = 'Select * from application_user '
+             sql_count = 'Select count(*) from application_user'
+             cur.execute(sql_search)
+             search_res = cur.fetchall()
+             cur.execute(sql_count)
+             count = cur.fetchall()
+             print(search_res)
+             print(count)
+             for i in range(count[0][0]):
+                  if search_res[i][1] == user_email and search_res[i][3] == user_password:
+                     k = k+1
+                     j = i
+                     exit
+             if k > 0:
+
+                     global  login_id
+                     login_id = search_res[j][4]
+                     print(login_id)
+                     return home_page()
+                      
+             else:
+                      return render_template('/Sign_in/fail.html')
+                  #   exit
+       
+        return render_template('/Sign_in/signin.html')
+
 
 @app.route('/homepage')
 def home_page():
-    return render_template('/Sign_in/index.html')
+     print(login_id)
+     return render_template('/Sign_in/index.html')
 
 
 @app.route('/police')
