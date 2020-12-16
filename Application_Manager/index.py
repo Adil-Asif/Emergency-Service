@@ -37,23 +37,23 @@ def pol_page():
 def signup_page():
 
     if request.method == "POST":
-        user_name = request.form.get('username')
-        user_email = request.form.get('email')
-        user_number = request.form.get('number')
-        user_password = request.form.get("psw")
+        app_man_name = request.form.get('username')
+        app_man_email = request.form.get('email')
+        app_man_number = request.form.get('number')
+        app_man_password = request.form.get("psw")
         #print(user_name, user_email, user_number, user_password)
         k = 0
-        name = user_name
-        passw = user_password
+        name = app_man_name
+        passw = app_man_password
 
-        if user_name != None and user_email != None and user_number != None and user_password != None:
+        if app_man_name != None and app_man_email != None and app_man_number != None and app_man_password != None:
 
              flag = True
              while flag == True:
-                 user_id = name[0:2] + passw[0:2] + \
+                 app_man_id = name[0:2] + passw[0:2] + \
                      str(random.randrange(1000, 9999))
-                 sql_search = 'Select user_id from application_user'
-                 sql_count = 'Select count(user_id) from application_user'
+                 sql_search = 'Select app_id from application_manager'
+                 sql_count = 'Select count(app_id) from application_manager'
                  cur.execute(sql_search)
                  res = cur.fetchall()
                  cur.execute(sql_count)
@@ -62,7 +62,7 @@ def signup_page():
                  k = 0
 
                  for i in range(count[0][0]):
-                     if res[i][0] == user_id:
+                     if res[i][0] == app_man_id:
                          k = k+1
                          exit
 
@@ -70,22 +70,22 @@ def signup_page():
                      flag = False
 
              k = 0
-             sql_search = 'Select phone from application_user'
-             sql_count = 'Select count(phone) from application_user'
+             sql_search = 'Select phone from application_manager'
+             sql_count = 'Select count(phone) from application_manager'
              cur.execute(sql_search)
              search_phone = cur.fetchall()
              cur.execute(sql_count)
              count = cur.fetchall()
-             sql_search = 'Select email from application_user'
+             sql_search = 'Select email from application_manager'
              cur.execute(sql_search)
              search_email = cur.fetchall()
              #print(search_email)
              for i in range(count[0][0]):
                #  print(search_phone[i][0])
-                 if search_email[i][0] == user_email:
+                 if search_email[i][0] == app_man_email:
                      k = k+1
 
-                 if search_phone[i][0] == user_number:
+                 if search_phone[i][0] == app_man_number:
                      k = k+1
                 #     print(k)
 
@@ -93,9 +93,9 @@ def signup_page():
                      exit
 
              if k < 1:
-                 sql_insert = """ Insert into application_user(username,email,phone,pass,user_id) values(:user_name,:useremail,:user_number,:user_password,:user_id) """
-                 cur.execute(sql_insert, (user_name, user_email,
-                             user_number, user_password, user_id))
+                 sql_insert = """ Insert into application_manager(username,email,phone,pass,app_id) values(:user_name,:useremail,:user_number,:user_password,:user_id) """
+                 cur.execute(sql_insert, (app_man_name, app_man_email,
+                             app_man_number, app_man_password, app_man_id))
                  conn.commit()
              else:
                return fail_page()
@@ -107,15 +107,15 @@ def signup_page():
 def signin_page():
 
         if request.method == "POST":
-          user_email = request.form.get('email')
-          user_password = request.form.get("psw")
-#          print(user_email, user_password)
-          if user_email != None and user_password != None:
+          app_man_email = request.form.get('email')
+          app_man_password = request.form.get("psw")
+#          print(app_man_email, app_man_password)
+          if app_man_email != None and app_man_password != None:
 
              k = 0
              j = None
-             sql_search = 'Select * from application_user '
-             sql_count = 'Select count(*) from application_user'
+             sql_search = 'Select * from application_manager '
+             sql_count = 'Select count(*) from application_manager'
              cur.execute(sql_search)
              search_res = cur.fetchall()
              cur.execute(sql_count)
@@ -123,7 +123,7 @@ def signin_page():
             # print(search_res)
              #print(count)
              for i in range(count[0][0]):
-                  if search_res[i][1] == user_email and search_res[i][3] == user_password:
+                  if search_res[i][1] == app_man_email and search_res[i][3] == app_man_password:
                      k = k+1
                      j = i
                      exit
@@ -143,7 +143,7 @@ def signin_page():
 
 @app.route('/homepage')
 def home_page():
-     print(login_id)
+    # print(login_id)
      return render_template('/Sign_in/index.html')
 
 

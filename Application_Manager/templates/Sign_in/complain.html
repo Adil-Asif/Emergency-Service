@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/signin.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="heading">Emergency Service Portal</h1>
+        <p class="tagline">At your service 24x7</p>
+
+        <div class="navbar">
+            <a href="/homepage">HOME</a>
+            <a href="/complain">VIEW ALL COMPLAINS</a>
+            <a href="#"> UPDATE COMPLAINT</a>
+        </div>
+
+    </div>
+
+    <div style="padding-bottom: 30px;">
+
+    </div>
+
+    <form action='/complain' method="POST">
+
+        <div class="container">
+
+                <h1 style="color: #456268; font-family:'Varela Round',sans-serif; font-size:25px">Register your complaint</h1>
+
+
+            
+            <div style="padding-top: 10px;">
+               <label  for="fname">Address where help is needed</label>
+              <input type="text" id="address" name="address" placeholder="Address where services are required" required>
+            </div>
+
+            <div style="padding-top: 10px;">
+               <label for="country">Complaint Type</label>
+               <input type="text" id="complain" name="complain" placeholder="Type of complaint" required>
+            </div>
+
+            <div style="padding-top: 10px;">
+               <label for="subject"> Complaint Details</label>
+               <input type="text" id="detail" name="detail" placeholder="Describe your complaint.." required>
+            </div>
+            
+            <div style="padding-top: 20px;">
+                <center><button class="signin" type="submit" name="request" style="width:140px ">REQUEST HELP</button></center>
+            </div>
+      </div>
+    </form>
+
+
+    <div class="header" style="left: 0;bottom: 0;width:100%; margin-top:20px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
+        <footer style="text-align: left;">&copy; Copyright 2020 <span style="color:#fbdcc4;font-size:18px; font-family: 'Varela Round', sans-serif;">EMERGENCY-SERVICES</span>
+            <span style="padding-left: 890px;">
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px;" class="fa fa-twitter"></i>
+                </a>
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px;" class="fa fa-linkedin"></i>
+                </a>
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px" class="fa fa-facebook"></i>
+                </a>
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px" class="fa fa-medium"></i>
+                </a>
+
+            </span>
+        </footer>
+
+    </div>
+
+
+</body>
+
+</html>
