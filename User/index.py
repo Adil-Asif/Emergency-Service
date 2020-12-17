@@ -227,7 +227,7 @@ def status_page():
          print(complain_id)
       return render_template('/Sign_in/complain_log.html',records=res,verify_id=login_id)
 
-@app.route('/complain/<complain_id>')
+@app.route('/complain_log/<complain_id>')
 def display_page(complain_id=None):
      print(login_id)
      sql_search = 'Select * from complain'
