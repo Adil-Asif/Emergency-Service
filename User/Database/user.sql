@@ -29,7 +29,7 @@ create table complain(
  complain_details varchar (500),
  user_id varchar(30) not null,
  app_id varchar(30),
- address varchar(50)
+ address varchar(50),
  FOREIGN KEY ( user_id ) REFERENCES application_user (user_id),
  FOREIGN KEY ( app_id ) REFERENCES application_manager (app_id),
  primary key(complain_id,user_id)
@@ -37,7 +37,7 @@ create table complain(
 
 
 
-select * from application_user 
+select * from complain 
 
 Insert into application_user
 values('Adil','adilasi1999@hotmail.com',123456789111,'Dfb456','1234')

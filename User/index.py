@@ -149,16 +149,19 @@ def home_page():
 
 @app.route('/police')
 def police_page():
+    print(login_id)
     return render_template('/Sign_in/police.html')
 
 
 @app.route('/ambulance')
 def ambulance_page():
+    print(login_id)
     return render_template('/Sign_in/amb.html')
 
 
 @app.route('/firebrgd')
 def firebrgd_page():
+    print(login_id)
     return render_template('/Sign_in/firebrgd.html')
 
 
@@ -199,14 +202,44 @@ def complain_page():
                  if(k == 0):
                      flag = False
 
-                 sql_insert = """ Insert into complain(complain_id,status,complain_type,complain_details,user_id,app_id,address)
+             sql_insert = """ Insert into complain(complain_id,status,complain_type,complain_details,user_id,app_id,address)
                               values(:complain_id, :status, :complain_type, :detail, :user_id, :app_id, :emer_add) """
-                 cur.execute(sql_insert, (complain_id, status,
+             cur.execute(sql_insert, (complain_id, status,
                              complain_type, detail, user_id, app_id, emer_add))
-                 conn.commit()
-                 return render_template('/Sign_in/success.html')
+             conn.commit()
+             return render_template('/Sign_in/success.html')
    
      return render_template('/Sign_in/complain.html')
+
+
+@app.route('/complain_log',methods=['GET', 'POST'])
+def status_page():
+
+      print(login_id)
+      sql_search = 'Select * from complain'
+      cur.execute(sql_search)
+      res = cur.fetchall()
+      print(type(login_id))
+      print(type(res[0][4]))
+      
+      if request.method == "POST":
+         complain_id = request.form.get('ab')
+         print(complain_id)
+      return render_template('/Sign_in/complain_log.html',records=res,verify_id=login_id)
+
+@app.route('/complain/<complain_id>')
+def display_page(complain_id=None):
+     print(login_id)
+     sql_search = 'Select * from complain'
+     cur.execute(sql_search)
+     res = cur.fetchall()
+     for record in res:
+         if record[0] == complain_id:
+             result = record
+     #print(type(res[0][4]))
+     return render_template('/Sign_in/more_detail.html',record=result)
+
+
 
 
 if __name__ == "__main__":
