@@ -7,102 +7,32 @@ body {
 
 form {
     /*Adding shadow to form and setting up box size for form*/
-    border: 3px solid #d0e8f2;
+    border: 3px solid #f1f1f1;
 
     margin-left: 30%;
     margin-right: 30%;
     background-color: #eeeded;
-    border-radius: 40px;
-
-    -webkit-box-shadow: 7px 7px 5px 0px #d2d3c9;
-    -moz-box-shadow: 7px 7px 5px 0px #d2d3c9;
-    box-shadow: 35px 7px 10px 10px #d2d3c9;
-}
-
-input[type=text],
-input[type=password],
-input[type=email],
-input[type=number] {
-    /*Setting up layout for input boxes*/
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #d0e8f2;
-    box-sizing: border-box;
-    font-size: 10px;
-    font-family: 'Comfortaa', cursive;
     border-radius: 10px;
+    
+    -webkit-box-shadow: 7px 7px 5px 0px #e2e4d9;
+    -moz-box-shadow: 7px 7px 5px 0px #e2e4d9;
+    box-shadow: 35px 7px 5px 5px #e2e4d9;
 }
 
-/*formatting font awesome icons for input boxes*/
-.input-container {
+form:hover{
+    -webkit-box-shadow: 7px 7px 5px 0px #b5b6af;
+    -moz-box-shadow: 7px 7px 5px 0px #b5b6af;
+    box-shadow: 35px 7px 5px 5px #b5b6af;
 
-    display: -ms-flexbox;
-    /* IE10 */
-    display: flex;
-    width: 100%;
-    margin-bottom: 15px;
 }
+
+
 
 .icon {
     color: #456268;
     min-width: 30px;
     padding-top: 13px;
 }
-
-/*design for signin button*/
-
-.signin {
-    background-color: #79a3b1;
-    color: #456268;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 30%;
-    -webkit-box-shadow: 7px 7px 5px 0px #d0e8f2;
-    -moz-box-shadow: 7px 7px 5px 0px #d0e8f2;
-    box-shadow: 7px 7px 5px 0px #d0e8f2;
-    font-family: 'Comfortaa', cursive;
-    font-size: 12px;
-
-}
-
-
-.signin:hover {
-    opacity: 0.8;
-    background-color: #d0e8f2;
-
-    -webkit-box-shadow: 7px 7px 5px 0px #79a3b1;
-    -moz-box-shadow: 7px 7px 5px 0px #79a3b1;
-    box-shadow: 7px 7px 5px 0px #79a3b1;
-}
-
-/*design for password button*/
-
-.pass {
-    font-size: 15px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-
-.pass-btn {
-    border: solid;
-    border-color: #79a3b1;
-    background-color: #79a3b1;
-    border-radius: 10px;
-    font-size: 13px;
-    font-family: 'Comfortaa', cursive;
-}
-
-.pass-btn:hover {
-    background-color: #d0e8f2;
-    border-color: #d0e8f2
-}
-
-
 
 
 /*Container size and width*/
@@ -183,4 +113,34 @@ h3 {
 .navbar a:hover {
     background-color: #ddd;
     color: black;
+}
+
+
+.btn {
+    background-color: #79a3b1;
+    color: 456268;
+    padding: 14px 20px;
+    margin: 8px 0;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 30%;
+    -webkit-box-shadow: 7px 7px 5px 0px #d0e8f2;
+    -moz-box-shadow: 7px 7px 5px 0px #d0e8f2;
+    box-shadow: 7px 7px 5px 0px #d0e8f2;
+    font-family: 'Comfortaa', cursive;
+    font-size: 12px;
+
+}
+
+
+.btn:hover {
+    opacity: 0.8;
+    background-color: #d0e8f2;
+
+    -webkit-box-shadow: 7px 7px 5px 0px #79a3b1;
+    -moz-box-shadow: 7px 7px 5px 0px #79a3b1;
+    box-shadow: 7px 7px 5px 0px #79a3b1;
 }

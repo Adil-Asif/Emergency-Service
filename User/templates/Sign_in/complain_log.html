@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/css/signin.css">
+    <link rel="stylesheet" href="static/css/log.css">
 
 </head>
 
@@ -17,8 +17,10 @@
 
         <div class="navbar">
             <a href="/homepage">HOME</a>
-            <a href="/complain">VIEW ALL COMPLAINS</a>
-            <a href="#"> UPDATE COMPLAINT</a>
+            <a href="/complain">FILE COMPAINT</a>
+            <a href="/complain_log">COMPLAINT LOG</a>
+            <a class="right" href="/">SIGN OUT</a>
+
         </div>
 
     </div>
@@ -26,38 +28,39 @@
     <div style="padding-bottom: 30px;">
 
     </div>
+     
 
-    <form action='/complain' method="POST">
+    {% for record in records %}
+    
+      {% if verify_id == record[4] %}
+           <div style="padding-bottom: 30px;"></div>
+            <form action="/complain_log" method="POST" >   
+              <div class="container">
+                 <p style = "font-family: 'Comfortaa', cursive; font-size: 16px; text-align: center;">
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Id:</b> {{record[0]}}
+                    <br> <br> 
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Status:</b> {{record[1]}}
+                    <br> <br>
+                    <center>
+                      <button class="btn" type="button" onclick="return abc('{{record[0]}}');">View Details</button>
+                    </center>
+                </p>
+              </div>     
+            </form>
+            <script>
+                function abc(display_record){
+                    window.location.href = "/complain_log/" + display_record
+                }
+            </script>
+           
+      {% endif %}
+    {% endfor %}
+         
 
-        <div class="container">
+    
+    <div style="padding-bottom: 80px;"></div> 
+    <div class="header" style="position: fixed; left: 0;bottom: 0;width:100%; margin-top:20px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
 
-                <h1 style="color: #456268; font-family:'Varela Round',sans-serif; font-size:25px">Register your complaint</h1>
-
-
-            
-            <div style="padding-top: 10px;">
-               <label  for="fname">Address where help is needed</label>
-              <input type="text" id="address" name="address" placeholder="Address where services are required" required>
-            </div>
-
-            <div style="padding-top: 10px;">
-               <label for="country">Complaint Type</label>
-               <input type="text" id="complain" name="complain" placeholder="Type of complaint" required>
-            </div>
-
-            <div style="padding-top: 10px;">
-               <label for="subject"> Complaint Details</label>
-               <input type="text" id="detail" name="detail" placeholder="Describe your complaint.." required>
-            </div>
-            
-            <div style="padding-top: 20px;">
-                <center><button class="signin" type="submit" name="request" style="width:140px ">REQUEST HELP</button></center>
-            </div>
-      </div>
-    </form>
-
-
-    <div class="header" style="left: 0;bottom: 0;width:100%; margin-top:20px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
         <footer style="text-align: left;">&copy; Copyright 2020 <span style="color:#fbdcc4;font-size:18px; font-family: 'Varela Round', sans-serif;">EMERGENCY-SERVICES</span>
             <span style="padding-left: 890px;">
 

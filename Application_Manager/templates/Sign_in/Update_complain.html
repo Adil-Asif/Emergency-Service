@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+<form  action="/complain_log/more_details/{{record[0]}}" method="POST">
+    <h2>Updating status for {{record[0]}}</h2>
+    <input type="text" value="{{record[1]}}" title="updated" name="updated">
+    <input type="submit" value="Update status">
+    
+     </form>
+
+</body>

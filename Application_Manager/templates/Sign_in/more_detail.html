@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/log.css">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="heading">Emergency Service Portal</h1>
+        <p class="tagline">At your service 24x7</p>
+
+        <div class="navbar">
+            <a href="/homepage">HOME</a>
+            <a href="/solved">Solved Complains</a>
+            <a href="/complain_log">COMPLAINT LOG</a>
+            <a class="right" href="/">SIGN OUT</a>
+        </div>
+
+    </div>
+
+    <div style="padding-bottom: 30px;">
+
+    </div>
+     
+
+           <div style="padding-bottom: 30px;"></div>
+            <form action="/complain_log/{{record[0]}}" method="POST" >   
+              <div class="container">
+                 <p style = "font-family: 'Comfortaa', cursive; font-size: 16px; text-align: center;">
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">User Id:</b> {{record[4]}}
+                    <br> <br> 
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Id:</b> {{record[0]}}
+                    <br> <br>
+                    {% if record[5] != None %}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Agent Id:</b> {{record[5]}}
+                    <br> <br> 
+                    {% else %}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Agent: </b>Not Assigned
+                    <br> <br> 
+                    {% endif %}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Type:</b> {{record[2]}}
+                    <br> <br>
+
+                    
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Details:</b> {{record[3]}}
+                    <br> <br> 
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Address to reach:</b> {{record[6]}}
+                    <br> <br>
+
+                     
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Status:</b> {{record[1]}}
+                    <br> <br>
+                    <button class="btn" type="button" onclick="return abc('{{record[0]}}');">Update</button>
+                    <br>
+
+                    <center>
+                      <a href="/complain_log" class="btn" style="text-decoration: none; padding-left: 30px; padding-right: 30px;"> Back</a>
+                    </center>
+                    
+                </p>
+              </div>    
+            </form>
+            
+            <script>
+                function new_page(){
+                    window.location.href = "/complain"
+                }
+                
+                function abc(display_record){
+                    window.location.href = "/complain_log/more_details/" + display_record
+                }
+            
+            </script>
+           
+         
+    
+           <div style="padding-bottom: 80px;"></div> 
+    <div class="header" style="position: fixed; left: 0;bottom: 0;width:100%; margin-top:20px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
+        <footer style="text-align: left;">&copy; Copyright 2020 <span style="color:#fbdcc4;font-size:18px; font-family: 'Varela Round', sans-serif;">EMERGENCY-SERVICES</span>
+            <span style="padding-left: 890px;">
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px;" class="fa fa-twitter"></i>
+                </a>
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px;" class="fa fa-linkedin"></i>
+                </a>
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px" class="fa fa-facebook"></i>
+                </a>
+
+                <a href="#">
+                    <i style="color: #fbdcc4; font-size:20px" class="fa fa-medium"></i>
+                </a>
+
+            </span>
+        </footer>
+
+    </div>
+
+
+ </body>
+
+</html>

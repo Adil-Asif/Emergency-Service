@@ -2,7 +2,7 @@ body {
     /*Setting default margin to zero and background styles for body*/
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
-    background-color: #fcf8ec;
+    background-color: #f4f4f4;
 }
 
 form {
@@ -55,7 +55,7 @@ input[type=number] {
 
 .signup {
     background-color: #79a3b1;
-    color: #456268;
+    color: 456268;
     padding: 14px 20px;
     margin: 8px 0;
     padding-left: 2px;
