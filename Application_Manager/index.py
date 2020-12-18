@@ -230,8 +230,8 @@ def status_solved():
 def status_pending():
 
       print(app_man_id)
-      sql_search = 'Select * from complain where status = :gen and status = :gen1'
-      cur.execute(sql_search,['Generated','generated'])
+      sql_search = 'Select * from complain where status = :gen'
+      cur.execute(sql_search,['Generated'])
       res = cur.fetchall()
       #print(type(login_id))
      # print(type(res[0][4]))
@@ -239,7 +239,7 @@ def status_pending():
       if request.method == "POST":
          complain_id = request.form.get('ab')
          print(complain_id)
-      return render_template('/Sign_in/Pendings_complain.html',records=res)
+      return render_template('/Sign_in/Pending_complains.html',records=res)
 
 
 @app.route('/complain_log',methods=['GET', 'POST'])
