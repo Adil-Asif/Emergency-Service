@@ -174,7 +174,7 @@ def complain_page():
         detail = request.form.get('detail')
         user_id = login_id
         app_id = None
-        status = "Generated"
+        status = "Generating"
         complain_id = None
         print(emer_add, complain_type, detail)
         k = 0

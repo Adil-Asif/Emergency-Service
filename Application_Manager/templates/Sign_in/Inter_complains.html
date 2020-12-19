@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/css/log.css">
+    <link rel="stylesheet" href="/static/css/log.css">
 
 </head>
 
@@ -19,11 +19,11 @@
             <a href="/homepage">HOME</a>
             <!-- <a href="/complain">FILE COMPAINT</a> -->
             <a href="/complain_log">COMPLAINT LOG</a>
+            <a href="/solved">SOLVED COMPALINS</a>
+            <a href="/pending">PENDING COMPALINS</a>
+            <a href="/new">NEW COMPALINS</a>
             <a class="right" href="/">SIGN OUT</a>
-            <a href="/solved">Solved Complains</a>
-            <a href="/pending">Pending Complains</a>
-
-
+            
         </div>
 
     </div>
@@ -32,6 +32,7 @@
 
     </div>
      
+    <center>  <h4 class="heading">Pending Complains</h4></center>
 
     {% for record in records %}
     

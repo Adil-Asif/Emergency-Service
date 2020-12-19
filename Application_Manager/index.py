@@ -165,58 +165,13 @@ def firebrgd_page():
     return render_template('/Sign_in/firebrgd.html')
 
 
-# @app.route('/complain', methods=['GET', 'POST'])
-# def complain_page():
-
-#      if request.method == "POST":
-#         emer_add = request.form.get('address')
-#         complain_type = request.form.get('complain')
-#         detail = request.form.get('detail')
-#         user_id = app_man_id
-#         app_id = None
-#         status = "Generated"
-#         complain_id = None
-#         print(emer_add, complain_type, detail)
-#         k = 0
-
-#         if complain_type != None and detail != None and emer_add != None:
-
-#              flag = True
-#              while flag == True:
-#                  complain_id = "COM" + user_id[0:2] + \
-#                      str(random.randrange(1000, 9999))
-#                  sql_search = 'Select complain_id from complain'
-#                  sql_count = 'Select count(complain_id) from complain'
-#                  cur.execute(sql_search)
-#                  res = cur.fetchall()
-#                  cur.execute(sql_count)
-#                  count = cur.fetchall()
-#                  print(count)
-#                  k = 0
-
-#                  for i in range(count[0][0]):
-#                      if res[i][0] == complain_id:
-#                          k = k+1
-#                          exit
-
-#                  if(k == 0):
-#                      flag = False
-
-#              sql_insert = """ Insert into complain(complain_id,status,complain_type,complain_details,user_id,app_id,address)
-#                               values(:complain_id, :status, :complain_type, :detail, :user_id, :app_id, :emer_add) """
-#              cur.execute(sql_insert, (complain_id, status,
-#                              complain_type, detail, user_id, app_id, emer_add))
-#              conn.commit()
-#              return render_template('/Sign_in/success.html')
-   
-#      return render_template('/Sign_in/complain.html')
-
 @app.route('/solved',methods=['GET', 'POST'])
 def status_solved():
 
       print(app_man_id)
-      sql_search = 'Select * from complain where status <> :gen and status <> :gen1'
-      cur.execute(sql_search,['Generated','generated'])
+      sql_search = """select * from complain where status='Suspended' or status='Fake' or status='Completed'""";
+ 
+      cur.execute(sql_search)
       res = cur.fetchall()
       #print(type(login_id))
      # print(type(res[0][4]))
@@ -226,12 +181,12 @@ def status_solved():
          print(complain_id)
       return render_template('/Sign_in/Solved_complains.html',records=res)
 
-@app.route('/pending',methods=['GET', 'POST'])
+@app.route('/new',methods=['GET', 'POST'])
 def status_pending():
 
       print(app_man_id)
       sql_search = 'Select * from complain where status = :gen'
-      cur.execute(sql_search,['Generated'])
+      cur.execute(sql_search,['Generating'])
       res = cur.fetchall()
       #print(type(login_id))
      # print(type(res[0][4]))
@@ -239,8 +194,23 @@ def status_pending():
       if request.method == "POST":
          complain_id = request.form.get('ab')
          print(complain_id)
-      return render_template('/Sign_in/Pending_complains.html',records=res)
+      return render_template('/Sign_in/New_complains.html',records=res)
 
+@app.route('/pending',methods=['GET', 'POST'])
+def status_new():
+
+      print(app_man_id)
+      sql_search = """select * from complain where status <> 'Generating' and status<> 'Completed' and status<> 'Fake' and status<> 'Suspended'"""
+
+      cur.execute(sql_search)
+      res = cur.fetchall()
+      #print(type(login_id))
+     # print(type(res[0][4]))
+      print(res)
+      if request.method == "POST":
+         complain_id = request.form.get('ab')
+         print(complain_id)
+      return render_template('/Sign_in/inter_complains.html',records=res)
 
 @app.route('/complain_log',methods=['GET', 'POST'])
 def status_page():
@@ -273,6 +243,7 @@ def display_page(complain_id=None):
 def checking(complain_id):
     print("we are checking" + complain_id)
     if request.method == "POST":
+       
         new_update=request.form.get('updated')
         print(new_update)
         if new_update!= None:
@@ -281,7 +252,7 @@ def checking(complain_id):
             conn.commit()
             return redirect('/complain_log')
     else:
-        sql_search1 = """ select * from complain where complain_id=:complainid"""
+        sql_search1 = """ select * from complain inner join application_user on application_user.user_id=complain.user_id where complain.complain_id=:complainid"""
         cur.execute(sql_search1,[complain_id])
         res=cur.fetchone()
         print(res)
