@@ -221,6 +221,7 @@ def status_page():
       res = cur.fetchall()
       #print(type(login_id))
      # print(type(res[0][4]))
+
       
       if request.method == "POST":
          complain_id = request.form.get('ab')
