@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import cx_Oracle
 import random
 
-conn = cx_Oracle.connect('SYSTEM/178951@//localhost:1521/xe')
+conn=cx_Oracle.connect('c##scot/tiger@//localhost:1521/orcl')
 cur = conn.cursor()
 
 app = Flask(__name__)
@@ -131,7 +131,7 @@ def signin_page():
 
                      global login_id
                      login_id = search_res[j][4]
-              #       print(login_id)
+                     print(login_id)
                      return redirect('/homepage')
 
              else:
@@ -174,7 +174,7 @@ def complain_page():
         detail = request.form.get('detail')
         user_id = login_id
         app_id = None
-        status = "Generated"
+        status = "Generating"
         complain_id = None
         print(emer_add, complain_type, detail)
         k = 0
@@ -219,8 +219,9 @@ def status_page():
       sql_search = 'Select * from complain'
       cur.execute(sql_search)
       res = cur.fetchall()
-      print(type(login_id))
-      print(type(res[0][4]))
+      #print(type(login_id))
+     # print(type(res[0][4]))
+
       
       if request.method == "POST":
          complain_id = request.form.get('ab')
