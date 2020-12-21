@@ -39,8 +39,13 @@ create table complain(
 
 select * from complain 
 
+update complain SET app_id = NULL
+
 Insert into application_user
 values('Adil','adilasi1999@hotmail.com',123456789111,'Dfb456','1234')
 
-Select count(*) from application_user where phone = 123456789111
 
+Select * from application_user where user_email = 'adilasif680@gmail.com' and user_password = 'Abc123'
+
+
+select complain.Complain_id,application_manager.username, application_manager.app_id from complain , application_manager where complain_id= 'COMAd8441'

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import cx_Oracle
 import random
 
-conn=cx_Oracle.connect('c##scot/tiger@//localhost:1521/orcl')
+conn=cx_Oracle.connect('SYSTEM/178951@//localhost:1521/xe')
 cur = conn.cursor()
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def signup_page():
         user_number = request.form.get('number')
         user_password = request.form.get("psw")
         #print(user_name, user_email, user_number, user_password)
-        k = 0
+        
         name = user_name
         passw = user_password
 
@@ -52,51 +52,30 @@ def signup_page():
              while flag == True:
                  user_id = name[0:2] + passw[0:2] + \
                      str(random.randrange(1000, 9999))
-                 sql_search = 'Select user_id from application_user'
-                 sql_count = 'Select count(user_id) from application_user'
-                 cur.execute(sql_search)
-                 res = cur.fetchall()
-                 cur.execute(sql_count)
-                 count = cur.fetchall()
-              #   print(count)
-                 k = 0
-
-                 for i in range(count[0][0]):
-                     if res[i][0] == user_id:
-                         k = k+1
-                         exit
-
-                 if(k == 0):
+                 sql_search = 'Select count(user_id) from application_user where user_id = :user_id'
+                 cur.execute(sql_search,[user_id])
+                 count_id = cur.fetchall()
+                 
+                 if count_id[0][0] == 0:
+                     flag = True
+                 else:
                      flag = False
 
-             k = 0
-             sql_search = 'Select phone from application_user'
-             sql_count = 'Select count(phone) from application_user'
-             cur.execute(sql_search)
-             search_phone = cur.fetchall()
-             cur.execute(sql_count)
-             count = cur.fetchall()
-             sql_search = 'Select email from application_user'
-             cur.execute(sql_search)
-             search_email = cur.fetchall()
-             #print(search_email)
-             for i in range(count[0][0]):
-               #  print(search_phone[i][0])
-                 if search_email[i][0] == user_email:
-                     k = k+1
+             sql_count = 'Select count(phone) from application_user where phone = :user_number'
+             cur.execute(sql_count,[user_number])
+             count_number = cur.fetchall()
+             sql_search = 'Select count(email) from application_user where email = :user_email'
+             cur.execute(sql_search,[user_email])
+             count_email = cur.fetchall()
+             #print(count_email[0][0])
+             #print(count_number[0][0])
+             if count_email[0][0] == 0 and count_number[0][0] == 0:
 
-                 if search_phone[i][0] == user_number:
-                     k = k+1
-                #     print(k)
-
-                 if k > 0:
-                     exit
-
-             if k < 1:
                  sql_insert = """ Insert into application_user(username,email,phone,pass,user_id) values(:user_name,:useremail,:user_number,:user_password,:user_id) """
                  cur.execute(sql_insert, (user_name, user_email,
                              user_number, user_password, user_id))
                  conn.commit()
+            
              else:
                return fail_page()
 
@@ -109,34 +88,27 @@ def signin_page():
         if request.method == "POST":
           user_email = request.form.get('email')
           user_password = request.form.get("psw")
-#          print(user_email, user_password)
+          #print(user_email, user_password)
           if user_email != None and user_password != None:
 
-             k = 0
-             j = None
-             sql_search = 'Select * from application_user '
-             sql_count = 'Select count(*) from application_user'
-             cur.execute(sql_search)
+             sql_search = 'Select * from application_user where email = :user_email and pass = :user_password'
+             sql_count = 'Select count(*) from application_user where email = :user_email and pass = :user_password'
+             cur.execute(sql_search,[user_email,user_password])
              search_res = cur.fetchall()
-             cur.execute(sql_count)
+             cur.execute(sql_count,[user_email,user_password])
              count = cur.fetchall()
-            # print(search_res)
+             #print(search_res)
              #print(count)
-             for i in range(count[0][0]):
-                  if search_res[i][1] == user_email and search_res[i][3] == user_password:
-                     k = k+1
-                     j = i
-                     exit
-             if k > 0:
 
-                     global login_id
-                     login_id = search_res[j][4]
-                     print(login_id)
-                     return redirect('/homepage')
+             if count[0][0] > 0:
+                 global login_id
+                 login_id = search_res[0][4]
+                 print(login_id)
+                 return redirect('/homepage')
 
              else:
-                      return render_template('/Sign_in/fail.html')
-                  #   exit
+                 return render_template('/Sign_in/fail.html')
+                 # exit
 
         return render_template('/Sign_in/signin.html')
 
@@ -176,30 +148,20 @@ def complain_page():
         app_id = None
         status = "Generating"
         complain_id = None
-        print(emer_add, complain_type, detail)
-        k = 0
-
+        #print(emer_add, complain_type, detail)
+       
         if complain_type != None and detail != None and emer_add != None:
 
              flag = True
              while flag == True:
                  complain_id = "COM" + user_id[0:2] + \
                      str(random.randrange(1000, 9999))
-                 sql_search = 'Select complain_id from complain'
-                 sql_count = 'Select count(complain_id) from complain'
-                 cur.execute(sql_search)
-                 res = cur.fetchall()
-                 cur.execute(sql_count)
+                 sql_count = 'Select count(complain_id) from complain where complain_id = :complain_id'
+                 cur.execute(sql_count,[complain_id])
                  count = cur.fetchall()
-                 print(count)
-                 k = 0
-
-                 for i in range(count[0][0]):
-                     if res[i][0] == complain_id:
-                         k = k+1
-                         exit
-
-                 if(k == 0):
+                 #print(count)
+                 
+                 if count[0][0] == 0:
                      flag = False
 
              sql_insert = """ Insert into complain(complain_id,status,complain_type,complain_details,user_id,app_id,address)
@@ -212,33 +174,94 @@ def complain_page():
      return render_template('/Sign_in/complain.html')
 
 
-@app.route('/complain_log',methods=['GET', 'POST'])
-def status_page():
+@app.route('/registered',methods=['GET', 'POST'])
+def registered_page():
 
       print(login_id)
-      sql_search = 'Select * from complain'
-      cur.execute(sql_search)
+      sql_search = 'Select * from complain where user_id = :login_id'
+      cur.execute(sql_search,[login_id])
       res = cur.fetchall()
       #print(type(login_id))
-     # print(type(res[0][4]))
+      print(res)
 
-      
-      if request.method == "POST":
-         complain_id = request.form.get('ab')
-         print(complain_id)
-      return render_template('/Sign_in/complain_log.html',records=res,verify_id=login_id)
+      return render_template('/Sign_in/registered.html',records=res,verify_id=login_id)
 
-@app.route('/complain_log/<complain_id>')
-def display_page(complain_id=None):
-     print(login_id)
-     sql_search = 'Select * from complain'
-     cur.execute(sql_search)
+@app.route('/registered/<complain_id>')
+def registered_display_page(complain_id=None):
+
+     sql_search = """ select complain.complain_id, complain.app_id,  complain.complain_type, complain.status, complain.complain_details, complain.address, application_user.username
+                      from complain inner join application_user on application_user.user_id = complain.user_id
+                      where complain_id= :complain_id """
+     cur.execute(sql_search,[complain_id])
      res = cur.fetchall()
-     for record in res:
-         if record[0] == complain_id:
-             result = record
-     #print(type(res[0][4]))
-     return render_template('/Sign_in/more_detail.html',record=result)
+     
+     return render_template('/Sign_in/more_detail.html',record=res[0])
+
+@app.route('/processing',methods=['GET', 'POST'])
+def processing_page():
+
+      print(login_id)
+      sql_search = 'Select * from complain where user_id = :login_id'
+      cur.execute(sql_search,[login_id])
+      res = cur.fetchall()
+      #print(type(login_id))
+      print(res)
+
+      return render_template('/Sign_in/processing.html',records=res,verify_id=login_id)
+
+@app.route('/processing/<complain_id>')
+def processing_display_page(complain_id=None):
+     
+     sql_search = """ select complain.complain_id, complain.app_id,  complain.complain_type, complain.status, complain.complain_details, complain.address, application_user.username
+                      from complain inner join application_user on application_user.user_id = complain.user_id
+                      where complain_id= :complain_id """
+     cur.execute(sql_search,[complain_id])
+     res = cur.fetchall()
+     
+     if res[0][1] != None:
+         sql_search = """ select application_manager.username
+                      from complain inner join application_manager on application_manager.app_id = complain.app_id
+                      where complain_id= :complain_id """
+     
+         cur.execute(sql_search,[complain_id])
+         res2 = cur.fetchall()
+         print(res2)
+
+     return render_template('/Sign_in/more_detail.html',record=res[0], app_name=res2[0][0] )
+
+
+@app.route('/solved',methods=['GET', 'POST'])
+def solved_page():
+
+      print(login_id)
+      sql_search = 'Select * from complain where user_id = :login_id'
+      cur.execute(sql_search,[login_id])
+      res = cur.fetchall()
+      #print(type(login_id))
+      print(res)
+
+      return render_template('/Sign_in/solved.html',records=res,verify_id=login_id)
+
+@app.route('/solved/<complain_id>')
+def solved_display_page(complain_id=None):
+     
+     sql_search = """ select complain.complain_id, complain.app_id,  complain.complain_type, complain.status, complain.complain_details, complain.address, application_user.username
+                      from complain inner join application_user on application_user.user_id = complain.user_id
+                      where complain_id= :complain_id """
+     cur.execute(sql_search,[complain_id])
+     res = cur.fetchall()
+     
+     if res[0][1] != None:
+         sql_search = """ select application_manager.username
+                      from complain inner join application_manager on application_manager.app_id = complain.app_id
+                      where complain_id= :complain_id """
+     
+         cur.execute(sql_search,[complain_id])
+         res2 = cur.fetchall()
+         print(res2)
+
+     return render_template('/Sign_in/more_detail.html',record=res[0], app_name=res2[0][0] )
+
 
 
 

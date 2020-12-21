@@ -18,27 +18,31 @@
         <div class="navbar">
             <a href="/homepage">HOME</a>
             <a href="/complain">FILE COMPAINT</a>
-            <a href="/complain_log">COMPLAINT LOG</a>
+            <div class="subnav">
+                <button class="subnavbtn">COMPLAIN LOG <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                   <a href="/registered">REGESTERED COMPLAINS</a>
+                   <a href="/processing">PROCESSING COMPLAINS</a>
+                   <a href="/solved">SOLVED COMPLAINTS</a> 
+                  </div>
+               </div>
             <a class="right" href="/">SIGN OUT</a>
         </div>
-
+         
     </div>
+      
+    <div style="padding-bottom:40px;"></div>
 
-    <div style="padding-bottom: 30px;">
 
-    </div>
-     
-
-           <div style="padding-bottom: 30px;"></div>
             <form action="/complain_log" method="POST" >   
               <div class="container">
                  <p style = "font-family: 'Comfortaa', cursive; font-size: 16px; text-align: center;">
-                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">User Id:</b> {{record[4]}}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">User Name:</b> {{record[6]}}
                     <br> <br> 
                     <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Id:</b> {{record[0]}}
                     <br> <br>
-                    {% if record[5] != None %}
-                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Agent Id:</b> {{record[5]}}
+                    {% if record[3] != 'Generating' %}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Agent Name:</b> {{app_name}}
                     <br> <br> 
                     {% else %}
                     <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Agent: </b>Not Assigned
@@ -48,16 +52,16 @@
                     <br> <br>
 
                     
-                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Details:</b> {{record[3]}}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Details:</b> {{record[4]}}
                     <br> <br> 
-                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Address to reach:</b> {{record[6]}}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Address to reach:</b> {{record[5]}}
                     <br> <br>
 
                      
-                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Status:</b> {{record[1]}}
+                    <b style="font-family: 'Varela Round', sans-serif; font-size:18px">Complaint Status:</b> {{record[3]}}
                     <br> <br>
                     <center>
-                      <a href="/complain_log" class="btn" style="text-decoration: none; padding-left: 30px; padding-right: 30px;"> Back</a>
+                      <a href="/homepage" class="btn" style="text-decoration: none; padding-left: 30px; padding-right: 30px;"> Back</a>
                     </center>
                     
                 </p>

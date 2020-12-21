@@ -18,21 +18,27 @@
         <div class="navbar">
             <a href="/homepage">HOME</a>
             <a href="/complain">FILE COMPAINT</a>
-            <a href="/complain_log">COMPLAINT LOG</a>
+            <div class="subnav">
+                <button class="subnavbtn">COMPLAIN LOG <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                   <a href="/registered">REGESTERED COMPLAINS</a>
+                   <a href="/processing">PROCESSING COMPLAINS</a>
+                   <a href="/solved">SOLVED COMPLAINTS</a> 
+                  </div>
+               </div>
             <a class="right" href="/">SIGN OUT</a>
-
         </div>
+         
 
     </div>
+ </div>
 
-    <div style="padding-bottom: 30px;">
+ <div style="padding-top: 40px;">
 
-    </div>
-     
-
-    {% for record in records %}
-    
-      {% if verify_id == record[4] %}
+       
+    <center><h1 class="heading" style="color: #393e46;padding-bottom: 30px ;padding-top: 40px;">RESOLVED COMPLAINTS</h1></center>
+      {% for record in records %}
+        {%  if record[1] == 'Fake' or record[1] == "Completed"  %}     
            <div style="padding-bottom: 30px;"></div>
             <form action="/complain_log" method="POST" >   
               <div class="container">
@@ -47,14 +53,18 @@
                 </p>
               </div>     
             </form>
+        {% endif %}
+    {% endfor %}
+     
+
+
             <script>
                 function abc(display_record){
-                    window.location.href = "/complain_log/" + display_record
+                    window.location.href = "/solved/" + display_record
                 }
             </script>
            
-      {% endif %}
-    {% endfor %}
+   
          
 
     
