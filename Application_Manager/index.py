@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import cx_Oracle
 import random
 
-conn=cx_Oracle.connect('SYSTEM/178951@//localhost:1521/xe')
+conn=cx_Oracle.connect('SYSTEM/password@//localhost:1521/xe')
 cur = conn.cursor()
 
 app = Flask(__name__)
@@ -35,7 +35,8 @@ def pol_page():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_page():
-
+     
+     #reads data from signup form
     if request.method == "POST":
         app_man_name = request.form.get('username')
         app_man_email = request.form.get('email')
@@ -46,8 +47,9 @@ def signup_page():
         name = app_man_name
         passw = app_man_password
 
+         #checks if data entered is not null
         if app_man_name != None and app_man_email != None and app_man_number != None and app_man_password != None:
-
+             #assigns a unique user id checks from database to make sure id is not already present
              flag = True
              while flag == True:
                  app_man_id = name[0:2] + passw[0:2] + \
@@ -60,7 +62,7 @@ def signup_page():
                  if(count[0][0] == 0):
                      flag = False
 
-             
+             #verifies if email address and mobile is unique
              sql_search = 'Select count(phone) from application_manager where phone = :app_man_number'
              cur.execute(sql_search,[app_man_number])
              count_phone = cur.fetchall()
@@ -82,7 +84,9 @@ def signup_page():
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin_page():
-
+        
+        #reads data from signup form
+        
         if request.method == "POST":
           app_man_email = request.form.get('email')
           app_man_password = request.form.get("psw")
@@ -97,6 +101,7 @@ def signin_page():
              count = cur.fetchall()
              #print(search_res)
              print(count)
+             #checks if email and passwords match
 
              if count[0][0] > 0:
 
@@ -135,7 +140,7 @@ def firebrgd_page():
     print(app_id)
     return render_template('/Sign_in/firebrgd.html')
 
-
+#function which displays solved complaints
 @app.route('/solved',methods=['GET', 'POST'])
 def status_solved():
 
@@ -150,8 +155,10 @@ def status_solved():
       
       return render_template('/Sign_in/Solved_complains.html',records=res)
 
+
+#function which displays new complaints
 @app.route('/new',methods=['GET', 'POST'])
-def status_pending():
+def status_new():
 
       print(app_id)
       sql_search = 'Select * from complain where status = :gen'
@@ -162,8 +169,9 @@ def status_pending():
       #print(res)
       return render_template('/Sign_in/New_complains.html',records=res)
 
+#function which displays pending complaints
 @app.route('/pending',methods=['GET', 'POST'])
-def status_new():
+def status_pending():
 
       print(app_id)
       sql_search = """select * from complain where status <> 'Generating' and status<> 'Completed' and status<> 'Fake' and status<> 'Suspended'"""
@@ -175,6 +183,7 @@ def status_new():
       #print(res)
       return render_template('/Sign_in/inter_complains.html',records=res)
 
+#function which displays all complaints
 @app.route('/complain_log',methods=['GET', 'POST'])
 def status_page():
 
@@ -187,22 +196,27 @@ def status_page():
       
       return render_template('/Sign_in/complain_log.html',records=res)
 
+
+
+#function which displays complaint details
 @app.route('/complain_log/<complain_id>')
 def display_page(complain_id=None):
      #print(app_man_id)
      sql_search = 'Select * from complain where complain_id = :complain_id'
      cur.execute(sql_search, [complain_id])
      res = cur.fetchall()
-     print(res)
+     #print(res)
      return render_template('/Sign_in/more_detail.html',record=res[0])
 
+
+#updates the complaints
 @app.route('/complain_log/more_details/<complain_id>', methods=['GET', 'POST'])
 def checking(complain_id):
     print("we are checking" + complain_id)
     if request.method == "POST":
        
         new_update=request.form.get('updated')
-        print(new_update)
+        #print(new_update)
         if new_update!= None:
             sql_search = """update complain set status=:updated where complain_id = :complainid"""
             cur.execute(sql_search,[new_update,complain_id])
@@ -212,9 +226,10 @@ def checking(complain_id):
         sql_search1 = """ select * from complain inner join application_user on application_user.user_id=complain.user_id where complain.complain_id=:complainid"""
         cur.execute(sql_search1,[complain_id])
         res=cur.fetchone()
-        print(res)
+        #print(res)
         sql_search1 = "update complain SET app_id = :app_id where complain_id = :complain_id"
         cur.execute(sql_search1,[app_id,complain_id])
+        conn.commit()
         return render_template("/Sign_in/Update_complain.html",record=res)
     
     

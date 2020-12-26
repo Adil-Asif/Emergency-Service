@@ -1,6 +1,6 @@
 drop table application_user
 drop table complain
-
+drop table application_manager
 
 
  create table application_user(
@@ -9,6 +9,7 @@ drop table complain
  phone number not null,
  pass VARCHAR(50) not null,
  user_id varchar(30) not null,
+ status varchar(30) not null,
  PRIMARY KEY (user_id) 
  );
 
@@ -37,7 +38,7 @@ create table complain(
 
 
 
-select * from complain 
+select * from application_manager 
 
 update complain SET app_id = NULL
 

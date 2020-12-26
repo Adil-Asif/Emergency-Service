@@ -6,62 +6,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/css/signup.css">
+    <link rel="stylesheet" href="/static/css/signup.css">
 
 </head>
 
 <body>
-    <div class="header">
+    <div class="header" style="margin-bottom:50px">
         <h1 class="heading">Emergency Service Portal</h1>
         <p class="tagline">At your service 24x7</p>
 
+
         <div class="navbar">
-            <a href="/homepage">HOME</a>
-            <a href="/complain">FILE COMPAINT</a>
-            <div class="subnav">
-                <button class="subnavbtn">COMPLAIN LOG <i class="fa fa-caret-down"></i></button>
-                <div class="subnav-content">
-                   <a href="/registered">REGESTERED COMPLAINS</a>
-                   <a href="/processing">PROCESSING COMPLAINS</a>
-                   <a href="/solved">SOLVED COMPLAINTS</a> 
-                  </div>
-               </div>
-            <a class="right" href="/">SIGN OUT</a>
+            <a href="/signup" class="right">SIGN UP</a>
         </div>
-    </div>
-
-    <div style="padding-bottom: 30px;">
 
     </div>
 
-    <form action="">
+
+    <div style="padding-bottom: 20px;">
+
+    </div>
+
+
+    <form action='/verifyemail/{{user_email}}' method="POST">
 
         <div class="container">
 
             <center>
-                <h1 style="color: #511845; font-family:'Varela Round',sans-serif;">Do not panic <b>Help</b> is on its way</h1>
-
-             
-            <div class="spc" style="padding-left:30px">
+                <h1 style="color: #456268; font-family:'Varela Round',sans-serif;">Email Verification</h1>
+            </center>
+            <div class="spc">
                 <div class="input-container">
-
-                        <centre>
-                            <b style="font-size:15px; padding-left:40px">Application is Registered</b><br><br><b style="font-size:15px; padding-left:40px">Help is arriving soon</b> <br> <br>
-        
-                        </centre>
-                    </h3>
-
+                    <i class="fa fa-user icon" style="font-size:30px;"></i>
+                    <input type="text" placeholder="Please Enter 6 digit otp" name="otp" id="username" required>
                 </div>
             </div>
+
+             
+            <center><button class="signup" type="submit" name="" style="color:white">Submit</button></center>
+
          
 
-            
         </div>
     </form>
+     
 
-
-
-    <div class="header" style=" position: fixed;left: 0;bottom: 0;width:100%; margin-top:50px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
+    <div class="header" style=" position: fixed; left: 0;bottom: 0;width:100%; margin-top:50px; padding-top:0px; font-size:17px; font-family: 'Varela Round', sans-serif;">
         <footer style="text-align: left;">&copy; Copyright 2020 <span style="color:#fbdcc4;font-size:18px; font-family: 'Varela Round', sans-serif;">EMERGENCY-SERVICES</span>
             <span style="padding-left: 890px;">
 
